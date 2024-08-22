@@ -3,7 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('audio');
     const progress = document.getElementById('progress');
     const durationText = document.getElementById('duration-text');
+    const progressBarContainer = document.getElementById('progress-bar-container');
+    const startButton = document.getElementById('start-button');
 
+    // Array of actions with specific times
+    const actions = [
+        { time: 4, action: () => body.style.backgroundColor = 'blue', done: false },
+        { time: 10, action: () => body.style.backgroundColor = 'red', done: false },
+        { time: 20, action: () => body.style.backgroundColor = 'green', done: false },
+        // Add more actions as needed
+    ];
+
+    // Function to update the progress bar and duration text
     function updateProgressBar() {
         const currentTime = audio.currentTime;
         const duration = audio.duration || 0;
@@ -20,56 +31,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    miku.classList.add('hidden');
-
+    // Function to make Miku grow gradually over time without a size limit
     function growMiku() {
-        const duration = audio.duration;
-        const interval = 100;
-        let currentTime = 0;
+        let width = 130; // Initial width
+        let height = 100; // Initial height
 
-        const growInterval = setInterval(() => {
-            currentTime = audio.currentTime;
-            if (currentTime >= duration) {
-                clearInterval(growInterval);
-                return;
-            }
-
-            const newWidth = 230 + (currentTime / duration) * 1030;
-            const newHeight = 200 + (currentTime / duration) * 1000;
-
-            miku.style.width = `${newWidth}px`;
-            miku.style.height = `${newHeight}px`;
-
-            updateProgressBar();
-        }, interval);
+        setInterval(() => {
+            width += 1; // Increment width
+            height += 1; // Increment height
+            miku.style.width = `${width}px`;
+            miku.style.height = `${height}px`;
+        }, 1000); // Adjust the interval as needed (1000ms = 1 second)
     }
 
-    audio.addEventListener('play', () => {
-        setTimeout(() => {
-            miku.classList.remove('hidden');
-            growMiku();
-        }, 16000);
+    // Handle start button click
+    startButton.addEventListener('click', () => {
+        // Hide the start button
+        startButton.style.display = 'none';
+
+        // Start the audio
+        audio.play().then(() => {
+            // Show and fade in the progress bar container
+            progressBarContainer.classList.remove('hidden');
+            setTimeout(() => {
+                progressBarContainer.style.opacity = '1';
+            }, 0);
+
+            // After 16 seconds, show Miku
+            setTimeout(() => {
+                miku.classList.remove('hidden');
+            }, 16000); // 16 seconds delay
+        }).catch(error => {
+            console.log('Audio playback failed:', error);
+        });
     });
 
+    // When audio ends, switch to chibi Miku and replace with a button
     audio.addEventListener('ended', () => {
         miku.src = 'miku.gif';
-        miku.style.width = '230px';
-        miku.style.height = '200px';
+        miku.style.width = '130px';
+        miku.style.height = '100px';
 
         setTimeout(() => {
             const button = document.createElement('button');
             button.textContent = 'Click Me!';
             button.onclick = () => alert('Button clicked!');
             miku.replaceWith(button);
-        }, 5000);
+        }, 5000); // 5 seconds delay
     });
 
-    audio.addEventListener('timeupdate', updateProgressBar);
+    // Update progress bar as the audio plays
+    audio.addEventListener('timeupdate', () => {
+        updateProgressBar();
 
-    // Ensure audio tries to play once the page loads, but consider user interaction.
-    window.onload = () => {
-        audio.play().catch(error => {
-            console.log('Autoplay was prevented:', error);
+        // Check for specific times and perform actions
+        actions.forEach(actionObj => {
+            console.log(`Checking action for time: ${actionObj.time}, current time: ${Math.floor(audio.currentTime)}`);
+            if (!actionObj.done && Math.floor(audio.currentTime) === actionObj.time) {
+                console.log(`Performing action at time: ${actionObj.time}`);
+                actionObj.action();
+                actionObj.done = true; // Mark the action as done
+            }
         });
-    };
+    });
 });
