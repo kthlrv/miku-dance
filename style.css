@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'QDHandRedrawn';
+    src: url('src/QDHandRedrawn.ttf') format('truetype');
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -6,7 +11,12 @@ body {
     height: 100vh;
     margin: 0;
     background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     text-align: center;
+    font-family: 'QDHandRedrawn', sans-serif;
+    overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -30,7 +40,6 @@ img.center {
 .text-element {
     color: rgb(251, 251, 32);
     padding: 10px;
-    font-family: "Lucida Console", "Courier New", monospace; 
     font-weight: bold;
     position: fixed;
     /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
@@ -91,15 +100,14 @@ img.center {
 }
 
 #song-title {
-    font-family: "Lucida Console", "Courier New", monospace;
     font-weight: bold;
     font-size: 14px;
 }
 
 #progress-bar-container {
     position: fixed;
-    bottom: 10px;
-    left: 10px;
+    bottom: 4px;
+    left: 20px;
     width: 200px;
     background-color: transparent;
     color: white;
@@ -127,7 +135,44 @@ img.center {
 
 #duration-text {
     font-size: 10px;
-    font-family: "Lucida Console", "Courier New", monospace;
     margin-top: 5px;
     color: white;
+}
+
+/* Keyframe animations */
+@keyframes left-pan {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes right-pan {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Animation classes */
+.left-pan {
+    animation: left-pan 1s ease-in-out;
+}
+
+.right-pan {
+    animation: right-pan 1s ease-in-out;
+}
+
+.fade-in {
+    animation: fade-in 1s ease-in-out;
+}
+
+.fade-out {
+    animation: fade-out 1s ease-in-out;
 }
