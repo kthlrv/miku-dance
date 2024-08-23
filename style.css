@@ -1,6 +1,8 @@
 @font-face {
     font-family: 'QDHandRedrawn';
-    src: url('src/QDHandRedrawn.ttf') format('truetype');
+    src: url('src/QDHandRedrawn.woff2') format('woff2'),
+         url('src/QDHandRedrawn.woff') format('woff'),
+         url('src/QDHandRedrawn.ttf') format('truetype');
 }
 
 body {
@@ -72,8 +74,8 @@ img.center {
 }
 
 #start-button {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
     border: none;
@@ -89,10 +91,10 @@ img.center {
     content: '';
     width: 0;
     height: 0;
-    border-left: 12px solid rgb(0, 0, 0);
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    transform: translateX(2px);
+    border-left: 18px solid rgb(0, 0, 0);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    transform: translateX(4px);
 }
 
 #start-button:hover {
@@ -101,7 +103,7 @@ img.center {
 
 #song-title {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 #progress-bar-container {
@@ -123,7 +125,7 @@ img.center {
     width: 100%;
     height: 3.5px; 
     background-color: white;
-    margin-top: 5px;
+    margin-top: 10px;
     border-radius: 1px; 
 }
 
@@ -134,8 +136,8 @@ img.center {
 }
 
 #duration-text {
-    font-size: 10px;
-    margin-top: 5px;
+    font-size: 12px;
+    margin-top: 10px;
     color: white;
 }
 
