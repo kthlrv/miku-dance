@@ -13,36 +13,46 @@ document.addEventListener('DOMContentLoaded', () => {
     let statusBG;
 
     const actions = [
-        { startTime: 1, action: () => changeBackground('image', 'url(img/static.gif)', 1, 15, false), done: false },
         { startTime: 16, action: () => { showElement(miku); growMiku(3, 1000); }, done: false },
 
-        { startTime: 30, action: () => showText('Spot', 30, 30.5, { bottom: '10%', right: '50%' }, 50), done: false },
-        { startTime: 30.5, action: () => showText('light', 30.5, 31, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 16.5, action: () => { showText('You\'re king of the castle', 16.5, 19.5, { top: '75%', left: '50%' }, 40); }, done: false },
 
-        // { startTime: 31, action: () => showImage('img/miku-dance.gif', 31, 60, {  bottom: '10%', right: '50%' }, 'right-pan'), done: false },
+        { startTime: 20.5, action: () => { showText('Whenever you\'re here,', 20.5, 22, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 22, action: () => { showText('you know it feels right.', 22, 24.5, { top: '75%', left: '50%' }, 40); }, done: false },
 
-        { startTime: 42, action: () => showText('Say', 42, 42.5, { bottom: '10%', right: '50%' }, 50), done: false },
-        { startTime: 42.5, action: () => showText('"I', 42.5, 43, { bottom: '10%', right: '50%' }, 50), done: false },
-        { startTime: 43, action: () => showText('want', 43, 43.5, { bottom: '10%', right: '50%' }, 50), done: false },
-        { startTime: 43.5, action: () => showText('you', 43.5, 44, { bottom: '10%', right: '50%' }, 50), done: false },
-        { startTime: 44, action: () => showText('too!"', 44, 44.5, { bottom: '10%', right: '50%' }, 50), done: false },
-        { startTime: 44.5, action: () => showText('<3', 44.5, 45.5, { bottom: '50%', right: '50%' }, 50), done: false },
+        { startTime: 24.5, action: () => { showText('Don\'t need to worry,', 24.5, 28.5, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 28.5, action: () => { showText('don\'t need the moon,', 28.5, 29.5, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 29.5, action: () => { showText('I\'ve got you\'re spotlight.', 29.5, 31, { top: '75%', left: '50%' }, 40); }, done: false },
 
-        { startTime: 44, action: () => hideElement(miku), done: false },
-        { startTime: 45.5, action: () => showElement(miku), done: false },
+        { startTime: 31, action: () => { showText('I want you to,', 31, 33, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 33, action: () => { showText('do want you want to.', 33, 35, { top: '75%', left: '50%' }, 40); }, done: false },
 
-        { startTime: 46, action: () => changeBackground('image', 'url(img/1.jpg)', 46, 46.5, true), done: false },
-        { startTime: 46.5, action: () => changeBackground('image', 'url(img/2.jpg)', 46.5, 47, true), done: false },
-        { startTime: 47, action: () => changeBackground('image', 'url(img/3.jpg)', 47, 47.5, true), done: false },
 
-        { startTime: 49, action: () => changeBackground('image', 'url(img/4.jpg)', 49, 49.5, true), done: false },
-        { startTime: 49.5, action: () => changeBackground('image', 'url(img/5.jpg)', 49.5, 50.5, true), done: false },
-        { startTime: 50, action: () => changeBackground('image', 'url(img/6.jpg)', 50.5, 51, true), done: false },
-        { startTime: 50.5, action: () => changeBackground('image', 'url(img/7.jpg)', 51, 51.5, true), done: false },
-        { startTime: 51, action: () => changeBackground('image', 'url(img/8.jpg)', 51.5, 52, false), done: false },
+        { startTime: 35, action: () => { showText('I want you to,', 35, 36.5, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 36.5, action: () => { showText('stay tonight.', 36.5, 39, { top: '75%', left: '50%' }, 40); }, done: false },
 
-        { startTime: 53, action: () => growMiku(20, 30), done: false },
-        { startTime: 55, action: () => shrinkMiku(20, 30), done: false },
+
+        { startTime: 39, action: () => { showText('I want you to,', 39, 42, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 42, action: () => { showText('say "I want you too!"', 42, 44, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 44, action: () => { hideElement(miku); } , done: false },
+        { startTime: 44, action: () => { showText(':(', 44, 45.5, { top: '50%', left: '50%' }, 50); }, done: false },
+        { startTime: 45.5, action: () => { showElement(miku); growMiku(6, 1000) } , done: false },
+
+        { startTime: 45.5, action: () => { showText('He never wants to strip down to his feelings.', 45.5, 49, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 49, action: () => { showText('He never wants to kiss and close his eyes.', 49, 52.5, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 52.5, action: () => { showText('He never wants to cry.', 52.5, 58, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 58, action: () => { showText('Cry...', 58, 60, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 60, action: () => { showText('I never really know when he\'ll be leaving,', 60, 64, { top: '75%', left: '50%' }, 40); }, done: false },
+        { startTime: 64, action: () => { showText('and even with "Hello" I hear "Goodbye."', 60, 68, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 68, action: () => { showText('He always makes me cry.', 68, 73, { top: '75%', left: '50%' }, 40); }, done: false },
+
+        { startTime: 73, action: () => { showText('Cry...', 73, 77, { top: '75%', left: '50%' }, 40); }, done: false },
     ];
 
     let ongoingBackgrounds = [];
@@ -204,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const link = document.createElement('a');
             link.textContent = 'Click Me!';
-            link.href = 'https://www.youtube.com/watch?v=hB8S6oKjiw8';
+            link.href = 'https://youtu.be/OQEjrrXWsVg?si=WHkDvOHlM0gAl5mJ';
             link.target = '_blank';
             link.classList.add('click-me-link');
             miku.replaceWith(link);
