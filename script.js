@@ -13,15 +13,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let statusBG;
 
     const actions = [
-        { startTime: 1, action: () => changeBackground('image', 'url(img/1.jpg)', 1, 1.5, faltruese), done : false },
-        { startTime: 1.5, action: () => changeBackground('image', 'url(img/2.jpg)', 1.5, 2, false), done : false },
-        { startTime: 2, action: () => changeBackground('image', 'url(img/3.jpg)', 2, 2.5, true), done : false },
-        { startTime: 2.5, action: () => changeBackground('image', 'url(img/4.jpg)', 2.5, 3, false), done : false },
+        { startTime: 1, action: () => changeBackground('image', 'url(img/static.gif)', 1, 15, false), done: false },
+        { startTime: 16, action: () => { showElement(miku); growMiku(3, 1000); }, done: false },
 
-        { startTime: 3, action: () => changeBackground('color', 'orange', 3, 3.5, false), done : false },
-        { startTime: 3.5, action: () => changeBackground('color', 'red', 3.5, 4, false), done : false },
-        { startTime: 4, action: () => changeBackground('color', 'blue', 4, 4.5, false), done : false },
-        { startTime: 4.5, action: () => changeBackground('color', 'red', 4.5, 5, false), done : false },
+        { startTime: 30, action: () => showText('Spot', 30, 30.5, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 30.5, action: () => showText('light', 30.5, 31, { bottom: '10%', right: '50%' }, 50), done: false },
+
+        // { startTime: 31, action: () => showImage('img/miku-dance.gif', 31, 60, {  bottom: '10%', right: '50%' }, 'right-pan'), done: false },
+
+        { startTime: 42, action: () => showText('Say', 42, 42.5, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 42.5, action: () => showText('"I', 42.5, 43, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 43, action: () => showText('want', 43, 43.5, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 43.5, action: () => showText('you', 43.5, 44, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 44, action: () => showText('too!"', 44, 44.5, { bottom: '10%', right: '50%' }, 50), done: false },
+        { startTime: 44.5, action: () => showText('<3', 44.5, 45.5, { bottom: '50%', right: '50%' }, 50), done: false },
+
+        { startTime: 44, action: () => hideElement(miku), done: false },
+        { startTime: 45.5, action: () => showElement(miku), done: false },
+
+        { startTime: 46, action: () => changeBackground('image', 'url(img/1.jpg)', 46, 46.5, true), done: false },
+        { startTime: 46.5, action: () => changeBackground('image', 'url(img/2.jpg)', 46.5, 47, true), done: false },
+        { startTime: 47, action: () => changeBackground('image', 'url(img/3.jpg)', 47, 47.5, true), done: false },
+
+        { startTime: 49, action: () => changeBackground('image', 'url(img/4.jpg)', 49, 49.5, true), done: false },
+        { startTime: 49.5, action: () => changeBackground('image', 'url(img/5.jpg)', 49.5, 50.5, true), done: false },
+        { startTime: 50, action: () => changeBackground('image', 'url(img/6.jpg)', 50.5, 51, true), done: false },
+        { startTime: 50.5, action: () => changeBackground('image', 'url(img/7.jpg)', 51, 51.5, true), done: false },
+        { startTime: 51, action: () => changeBackground('image', 'url(img/8.jpg)', 51.5, 52, false), done: false },
+
+        { startTime: 53, action: () => growMiku(20, 30), done: false },
+        { startTime: 55, action: () => shrinkMiku(20, 30), done: false },
     ];
 
     let ongoingBackgrounds = [];
@@ -38,20 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
         element.style.visibility = 'visible';
     }
 
-
     // If you want the background to change to a color or image and stay that way, set keepBackground to true.
     // If you want the background to change temporarily and then revert back, set keepBackground to false.
     function changeBackground(type, value, startTime, endTime, keepBackground) {
         if (type === 'color') {
             body.style.backgroundColor = value;
         } else if (type === 'image') {
-            body.style.backgroundImage = `${value}`;
+            body.style.backgroundImage = value;
         }
-    
-        statusBG = keepBackground;
-    
-        if (!keepBackground) { // REVERT BACK
+
+        if (!keepBackground) {
             const duration = (endTime - startTime) * 1000;
+
             setTimeout(() => {
                 if (type === 'color') {
                     body.style.backgroundColor = originalColor;
@@ -60,21 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, duration);
         }
-        // ongoingBackgrounds = ongoingBackgrounds.filter(({ type }) => type !== type);
     }
     
     function updateBackgroundVisibility(currentTime) {
-        if (!statusBG) { // Only revert if keepBackground is false
-            body.style.backgroundColor = originalColor;
-            body.style.backgroundImage = 'none';
-        }
+        body.style.backgroundColor = originalColor;
+        body.style.backgroundImage = 'none';
     
         ongoingBackgrounds.forEach(({ type, value, startTime, endTime }) => {
             if (currentTime >= startTime && currentTime < endTime) {
                 if (type === 'color') {
                     body.style.backgroundColor = value;
                 } else if (type === 'image') {
-                    body.style.backgroundImage = `${value}`;
+                    body.style.backgroundImage = `url('${value}')`;
                 }
             }
         });
